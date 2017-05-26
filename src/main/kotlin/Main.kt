@@ -4,6 +4,7 @@ import java.io.*
 
 fun main(args: Array<String>) {
     println(System.getProperty("user.dir"))
+/*
     val df: DataFrame = DataFrame.fromCSV(File("bel_epoio_data.txt"), format = CSVFormat.TDF)
 
     // Print rows
@@ -12,6 +13,7 @@ fun main(args: Array<String>) {
 
     // Print structure
     df.glimpse()
+*/
 
     /*
     DataFrame with 1343539 observations
@@ -21,7 +23,7 @@ fun main(args: Array<String>) {
     ?EFFECTOR_DIRECTNESS    : [Str] , [unknown, unknown, unknown, direct, unknown, unknown, unknown, unknown]
     ?OBJECT_UID     : [Int] , [1883705205, 243248353, 1051024117, 1440120639, 1873766775, 1340348709, 1051024117, 611322903]
     */
-
+/*
     // Resort with arrange
     val df1: DataFrame = df.arrange("?FINDING_ID")
     df1.print(colNames = false)
@@ -42,4 +44,26 @@ fun main(args: Array<String>) {
     df6.print(colNames = false)
     val df7: DataFrame = df.filter({ it["?EFFECTOR_RELATIONSHIP"].asStrings().map { it!!.endsWith("NoChange") }.toBooleanArray() })
     df7.print(colNames = false)
+*/
+
+    val a: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding.txt"), format = CSVFormat.TDF.withHeader("mutationId","findingId"))
+    //a                              // with default printing options
+    //a.print(colNames = false)      // with custom  printing options
+    a.glimpse()
+
+    val b: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding_pwcb_test.txt"), format = CSVFormat.newFormat('|').withHeader("mutationId","findingId"))
+    //b                              // with default printing options
+    //b.print(colNames = false)      // with custom  printing options
+    b.glimpse()
+
+    val c =  a.rows - b.rows
+    //println("A \\ B = $c")
+    val d = b.rows - a.rows
+    //println("B \\ A = $d")
+    val e = c.union(d)
+    //println("A Δ B = $e")
+
+    val ab = a.rows + b.rows
+    val sd = ab - a.rows.intersect(b.rows)
+    println("A Δ B = $sd")
 }
