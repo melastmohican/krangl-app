@@ -17,10 +17,14 @@ apply plugin: 'application'
 
 mainClassName = "MainKt"
 
+applicationName = 'krangl-app'
+
+applicationDefaultJvmArgs = ["-Xms6G", "-Xmx6G"]
+
 repositories {
     mavenLocal()
     jcenter()
-    maven { url 'https://jitpack.io' }
+    mavenCentral()
 }
 
 dependencies {

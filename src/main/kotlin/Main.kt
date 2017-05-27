@@ -56,11 +56,11 @@ fun main(args: Array<String>) {
     //b.print(colNames = false)      // with custom  printing options
     b.glimpse()
 
-    val c =  a.rows - b.rows
+    //val c =  a.rows - b.rows
     //println("A \\ B = $c")
-    val d = b.rows - a.rows
+    //val d = b.rows - a.rows
     //println("B \\ A = $d")
-    val e = c.union(d)
+    //val e = c.union(d)
     //println("A Δ B = $e")
 
     val ab = a.rows + b.rows
