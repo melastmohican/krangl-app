@@ -64,6 +64,10 @@ fun main(args: Array<String>) {
     //println("A Δ B = $e")
 
     val ab = a.rows + b.rows
-    val sd = ab - a.rows.intersect(b.rows)
+    println(ab.size)
+    val it = a.rows.intersect(b.rows)
+    println(it.size)
+    val sd = ab - it
+    println(sd.size)
     println("A Δ B = $sd")
 }
