@@ -70,4 +70,12 @@ fun main(args: Array<String>) {
     val sd = ab - it
     println(sd.size)
     println("A Δ B = $sd")
+
+    /*
+def test = [["a","b"],["c","d"],["a","b"],["a","b"],["c","d"]]
+def g = test.groupBy { [it[0], it[1]] }
+println g
+def c = g.collectEntries { key, value -> [ (key) : value.count { it } ] }
+println c
+    */
 }
