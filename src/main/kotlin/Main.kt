@@ -49,33 +49,32 @@ fun main(args: Array<String>) {
     val a: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding.txt"), format = CSVFormat.TDF.withHeader("mutationId","findingId"))
     //a                              // with default printing options
     //a.print(colNames = false)      // with custom  printing options
-    a.glimpse()
+    //a.glimpse()
 
     val b: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding_pwcb_test.txt"), format = CSVFormat.newFormat('|').withHeader("mutationId","findingId"))
     //b                              // with default printing options
     //b.print(colNames = false)      // with custom  printing options
-    b.glimpse()
+    //b.glimpse()
 
-    //val c =  a.rows - b.rows
-    //println("A \\ B = $c")
-    //val d = b.rows - a.rows
-    //println("B \\ A = $d")
-    //val e = c.union(d)
-    //println("A Δ B = $e")
-
-    val ab = a.rows + b.rows
-    println(ab.size)
-    val it = a.rows.intersect(b.rows)
-    println(it.size)
-    val sd = ab - it
-    println(sd.size)
-    println("A Δ B = $sd")
+    val ca = a.rows
+        .groupBy { listOf(it["mutationId"],it["findingId"])}
+        .map { listOf(it.key[0],it.key[1], it.value.count()) }
+        .sortedWith(compareBy( { it[0].toString() }, { it[1].toString() } ))
+    println(ca)
+    val cb = b.rows
+        .groupBy { listOf(it["mutationId"],it["findingId"])}
+        .map { listOf(it.key[0],it.key[1], it.value.count()) }
+        .sortedWith(compareBy( { it[0].toString() }, { it[1].toString() } ))
+    println(cb)
 
     /*
-def test = [["a","b"],["c","d"],["a","b"],["a","b"],["c","d"]]
-def g = test.groupBy { [it[0], it[1]] }
-println g
-def c = g.collectEntries { key, value -> [ (key) : value.count { it } ] }
-println c
+    val cab = ca + cb
+    println(cab.size)
+    val cit = ca.intersect(cb)
+    println(cit.size)
+    val csd = cab - cit
+    println(csd.size)
+    println("A Δ B = $csd")
     */
+    println (ca == cb)
 }
