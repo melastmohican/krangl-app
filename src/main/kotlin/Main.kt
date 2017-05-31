@@ -67,4 +67,19 @@ fun main(args: Array<String>) {
 	println(gb.rows.toList().size)
 	println(ga.rows.toList() == gb.rows.toList())
 
+	println("AA")
+	val aa: DataFrame = DataFrame.fromCSV(File("ING_MUTATION_PROPERTIES.txt.gz"), format = CSVFormat.newFormat('|').withHeader())
+	aa.glimpse()
+	println("BB")
+	val bb: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding.txt.gz"), format = CSVFormat.TDF.withHeader("mutationId","findingId"))
+	bb.glimpse()
+	println("Count")
+	val gaa = aa.count("?MutationId","?FindingID")
+	val gbb = bb.count("mutationId","findingId")
+	//println(gaa.rows.toList())
+	println(gaa.rows.toList().size)
+	//println(gbb.rows.toList())
+	println(gbb.rows.toList().size)
+	println(gaa.rows.toList() == gbb.rows.toList())
+
 }
