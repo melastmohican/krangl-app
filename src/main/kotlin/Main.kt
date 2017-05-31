@@ -46,23 +46,45 @@ fun main(args: Array<String>) {
     df7.print(colNames = false)
 */
 
-    val a: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding.txt"), format = CSVFormat.TDF.withHeader("mutationId","findingId"))
+    val a: DataFrame = DataFrame.fromCSV(File("mutation_property125933259.txt"), format = CSVFormat.TDF.withHeader("mutation_id", "unspecified_with_phenotype_chr", "unspecified_without_phenotype_chr",
+						"disease_segregates_with_mutation", "functional_study_protein_has_property", "gain_of_function",
+						"mutation_property", "acquisition_source_id", "compound_het_with_phenotype",
+						"compound_het_without_phenotype", "het_with_phenotype", "het_without_phenotype",
+						"num_other_complex_with_phenotype", "num_other_complex_without_phenotype", "num_total_het_with_phenotype",
+						"num_total_het_without_phenotype", "unspecified_with_phenotype", "unspecified_without_phenotype",
+						"patients_from_single_family", "affected_family_member_lacks_mutation", "primary_reference",
+						"hemizygous_with_phenotype", "hemizygous_without_phenotype", "mut_in_other_gene_with_phenotype",
+						"mut_in_other_gene_without_phenotype", "total_het_with_phenotype", "total_het_without_phenotype",
+						"finding_type", "patients_with_phenotype", "patients_without_phenotype", "denovo", "clinical_significance",
+						"complex_homozygous_with_phenotype", "complex_homozygous_without_phenotype",
+						"other_complex_with_phenotype", "other_complex_without_phenotype"))
     //a                              // with default printing options
     //a.print(colNames = false)      // with custom  printing options
     //a.glimpse()
 
-    val b: DataFrame = DataFrame.fromCSV(File("mutationIdToFinding_pwcb_test.txt"), format = CSVFormat.newFormat('|').withHeader("mutationId","findingId"))
+    val b: DataFrame = DataFrame.fromCSV(File("mutation_property_pwcb_test125933259.txt"), format = CSVFormat.newFormat('|').withHeader("mutation_id",
+						"unspecified_with_phenotype_chr", "unspecified_without_phenotype_chr", "disease_segregates_with_mutation",
+						"functional_study_protein_has_property", "gain_of_function", "mutation_property", "acquisition_source_id",
+						"compound_het_with_phenotype", "compound_het_without_phenotype", "het_with_phenotype",
+						"het_without_phenotype", "num_other_complex_with_phenotype", "num_other_complex_without_phenotype",
+						"num_total_het_with_phenotype", "num_total_het_without_phenotype", "unspecified_with_phenotype",
+						"unspecified_without_phenotype", "patients_from_single_family", "affected_family_member_lacks_mutation",
+						"primary_reference", "hemizygous_with_phenotype", "hemizygous_without_phenotype",
+						"mut_in_other_gene_with_phenotype", "mut_in_other_gene_without_phenotype", "total_het_with_phenotype",
+						"total_het_without_phenotype", "finding_type", "patients_with_phenotype", "patients_without_phenotype",
+						"denovo", "clinical_significance", "complex_homozygous_with_phenotype",
+						"complex_homozygous_without_phenotype", "other_complex_with_phenotype", "other_complex_without_phenotype"))
     //b                              // with default printing options
     //b.print(colNames = false)      // with custom  printing options
     //b.glimpse()
 
     val ca = a.rows
-        .groupBy { listOf(it["mutationId"],it["findingId"])}
+        .groupBy { listOf(it["mutation_id"],it["acquisition_source_id"])}
         .map { listOf(it.key[0],it.key[1], it.value.count()) }
         .sortedWith(compareBy( { it[0].toString() }, { it[1].toString() } ))
     println(ca)
     val cb = b.rows
-        .groupBy { listOf(it["mutationId"],it["findingId"])}
+        .groupBy { listOf(it["mutation_id"],it["acquisition_source_id"])}
         .map { listOf(it.key[0],it.key[1], it.value.count()) }
         .sortedWith(compareBy( { it[0].toString() }, { it[1].toString() } ))
     println(cb)
