@@ -14,6 +14,7 @@ buildscript {
 
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'eclipse'
 
 mainClassName = "MainKt"
 
@@ -35,5 +36,12 @@ dependencies {
     
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+}
+
+eclipse {
+   classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
 }
 
