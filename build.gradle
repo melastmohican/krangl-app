@@ -20,7 +20,7 @@ mainClassName = "MainKt"
 
 applicationName = 'krangl-app'
 
-applicationDefaultJvmArgs = ["-Xms6G", "-Xmx6G"]
+applicationDefaultJvmArgs = ["-Xms8G", "-Xmx8G"]
 
 repositories {
     mavenLocal()
