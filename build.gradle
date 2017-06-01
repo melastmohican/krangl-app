@@ -20,7 +20,7 @@ mainClassName = "MainKt"
 
 applicationName = 'krangl-app'
 
-applicationDefaultJvmArgs = ["-Xms10G", "-Xmx10G"]
+applicationDefaultJvmArgs = ["-Xms6G", "-Xmx6G"]
 
 repositories {
     mavenLocal()
@@ -28,7 +28,12 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    ktlint
+}
+
 dependencies {
+    ktlint 'com.github.shyiko:ktlint:0.8.1'
     compile 'com.google.guava:guava:20.0'
     compile 'org.slf4j:slf4j-api:1.7.7'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -43,5 +48,19 @@ eclipse {
         downloadJavadoc = true
         downloadSources = true
     }
+}
+
+task ktlint(type: JavaExec) {
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+}
+
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec) {
+    main = "com.github.shyiko.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
 }
 

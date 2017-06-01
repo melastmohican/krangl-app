@@ -2,8 +2,8 @@ import kotlin.test.assertEquals
 import org.junit.Test
 
 class TestMain {
-    
-    @Test 
+
+    @Test
     fun f() {
         assertEquals("", "")
     }
