@@ -6,4 +6,8 @@ bel_*.txt
 mutationIdToFinding*.txt
 ING_MUT*.txt*
 mutationIdToFinding*.txt*
-/krangl-app.iml
+krangl-app.iml
+.settings
+.vscode
+.classpath
+.project
