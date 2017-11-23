@@ -36,7 +36,7 @@ dependencies {
     compile 'com.google.guava:guava:20.0'
     compile 'org.slf4j:slf4j-api:1.7.7'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "de.mpicbg.scicomp:krangl:0.5-SNAPSHOT"
+    compile "de.mpicbg.scicomp:krangl:0.6"
     
     testCompile 'junit:junit:4.12'
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
